@@ -1,0 +1,137 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  max-width: 1000px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0.75rem;
+  /* display: flex; */
+  /* padding: 1rem; */
+  /* align-items: center; */
+}
+
+.bio {
+  display: grid;
+  height: 100%;
+  grid-template-areas: "portraitL portraitL portraitL portraitL textL gridL gridL gridL gridL";
+}
+
+.bio .bImage {
+  /* flex: 1; */
+  grid-area: portraitL;
+}
+
+.bio .bImage img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.bio .bText {
+  /* flex: 1; */
+  padding: 1rem;
+  grid-area: textL;
+}
+
+.bio .bText h1 {
+  padding-bottom: 0.5rem;
+}
+
+.bio .bGrid {
+  /* flex: 3; */
+  grid-area: gridL;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-gap: 1rem;
+}
+
+.bio .bGrid #image1 {
+  grid-column-start: 4;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 6;
+}
+.bio .bGrid #image2 {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 5;
+}
+.bio .bGrid #image3 {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 5;
+  grid-row-end: 9;
+}
+.bio .bGrid #image4 {
+  grid-column-start: 4;
+  grid-column-end: 7;
+  grid-row-start: 6;
+  grid-row-end: 9;
+}
+.bio .bGrid #image5 {
+  grid-column-start: 7;
+  grid-column-end: 9;
+  grid-row-start: 6;
+  grid-row-end: 9;
+}
+
+.bio .bGrid img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 800px) {
+  .container {
+    height: 200vh;
+    padding: 0;
+  }
+  .bio {
+    grid-template-areas:
+      "portraitL textL"
+      "gridL gridL";
+    grid-gap: 2rem;
+  }
+  .bio .bText h1 {
+    font-size: 3rem;
+  }
+  .bio .bText p {
+    font-size: 1.725rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    height: 200vh;
+    padding: 0;
+  }
+  .bio {
+    grid-template-areas:
+      "portraitL"
+      "textL"
+      "gridL";
+    grid-gap: 2rem;
+  }
+  .bio .bText h1 {
+    font-size: 2rem;
+  }
+  .bio .bText p {
+    font-size: 1rem;
+  }
+
+  .bio .bGrid {
+    height: 100vh;
+  }
+}
