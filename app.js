@@ -51,24 +51,12 @@ setInterval(() => {
 
   // Act 2:
   if (scrollTrail > 150 && 360 > scrollTrail) {
-    text.setAttribute(
-      "style",
-      `opacity: ${(-150 + scrollTrail) * 0.01};
-       `
-    );
+    setOpacity(text, (-150 + scrollTrail) * 0.01);
   } else if (scrollTrail < 150) {
-    text.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
+    setOpacity(text, 0);
   } else if (scrollTrail > 360 && 550 > scrollTrail) {
     let textAway = scrollTrail - 400;
-    text.setAttribute(
-      "style",
-      `opacity: ${1 - textAway / 100};
-       `
-    );
+    setOpacity(text, 1 - textAway / 100);
   }
 
   // Act 3 Biography
