@@ -28,6 +28,16 @@ const setOpacity = (element, value) => {
   );
 };
 
+const act3Vis = value => {
+  setOpacity(bioImg, value);
+  setOpacity(bioText, value);
+  setOpacity(image1, value);
+  setOpacity(image2, value);
+  setOpacity(image3, value);
+  setOpacity(image4, value);
+  setOpacity(image5, value);
+};
+
 const convertToTick = value => 1000 / value;
 
 // Animation Loop
@@ -69,22 +79,12 @@ setInterval(() => {
     setOpacity(image4, (-605 + scrollTrail) * 0.005);
     setOpacity(image5, (-615 + scrollTrail) * 0.005);
   } else if (scrollTrail < 560) {
-    setOpacity(bioImg, 0);
-    setOpacity(bioText, 0);
-    setOpacity(image1, 0);
-    setOpacity(image2, 0);
-    setOpacity(image3, 0);
-    setOpacity(image4, 0);
-    setOpacity(image5, 0);
+    act3Vis(0);
   } else if (scrollTrail > 815) {
-    setOpacity(bioImg, 1);
-    setOpacity(bioText, 1);
-    setOpacity(image1, 1);
-    setOpacity(image2, 1);
-    setOpacity(image3, 1);
-    setOpacity(image4, 1);
-    setOpacity(image5, 1);
+    act3Vis(1);
   }
+
+  // count frame
   fpsCounter += 1;
 }, convertToTick(fps));
 
