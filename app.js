@@ -49,13 +49,23 @@ let fps = 60;
 let fpsCounter = 0;
 
 const fadeIn = (min, max, pos) => {
-  let increments = max - min;
-  return (increments / 10000) * (pos - min);
+  let increments = 100 / (max - min);
+  return (increments * (pos - min)) / 100;
 };
 
 const fadeOut = (min, max, pos) => {
-  let increments = max - min;
-  return 1 - (increments / 10000) * (pos - min);
+  let increments = 100 / (max - min);
+  return 1 - (increments * (pos - min)) / 100;
+};
+
+const act1Controller = (min, max, length, pos) => {
+  img.setAttribute(
+    "style",
+    `transform: rotate(${(pos / 15) * 1.5}deg) scale(${1 + pos / 15}, ${1 +
+      pos / 15}) !important;
+      opacity: ${100 - (pos * 11) / 15};
+      filter: brightness(${100 - pos}%);`
+  );
 };
 
 const act2Controller = (min, max, length, pos) => {
@@ -71,37 +81,29 @@ const act2Controller = (min, max, length, pos) => {
   }
 };
 
+const act3Controller = (min, max, length, pos) => {
+  let buffer = (max - min - length) / 2;
+  if (pos < min) {
+    act3Vis(0);
+  } else if (pos > min && pos < min + buffer) {
+    act3Vis(fadeIn(min, min + buffer, pos));
+    console.log(`Min: ${min} Max: ${min + buffer}`);
+    console.log(`Fading: ${fadeIn(min, min + buffer, pos)}`);
+  } else if (pos > min + buffer) {
+    act3Vis(1);
+  }
+};
+
 setInterval(() => {
-  // console.log(`FPS Target: ${fps}, Target: ${convertToTick(fps)}`);
   scrollPos = window.scrollY;
   scrollTrail += (scrollPos - scrollTrail) * trailRate;
   console.log(`The scrollTrail is currently: ${scrollTrail}`);
 
-  //  Act 1 : Camera Zoom In
-  img.setAttribute(
-    "style",
-    `transform: rotate(${(scrollTrail / 15) * 1.5}deg) scale(${1 +
-      scrollTrail / 15}, ${1 + scrollTrail / 15}) !important;
-      opacity: ${100 - (scrollTrail * 11) / 15};
-      filter: brightness(${100 - scrollTrail}%);`
-  );
+  act1Controller(0, 140, 140, scrollTrail);
 
-  act2Controller(140, 550, 200, scrollTrail);
+  act2Controller(140, 420, 200, scrollTrail);
 
-  // Act 3 Biography
-  if (scrollTrail > 560 && scrollTrail < 820) {
-    setOpacity(bioImg, (-560 + scrollTrail) * 0.02);
-    setOpacity(bioText, (-560 + scrollTrail) * 0.01);
-    setOpacity(image1, (-560 + scrollTrail) * 0.005);
-    setOpacity(image2, (-575 + scrollTrail) * 0.005);
-    setOpacity(image3, (-590 + scrollTrail) * 0.005);
-    setOpacity(image4, (-605 + scrollTrail) * 0.005);
-    setOpacity(image5, (-615 + scrollTrail) * 0.005);
-  } else if (scrollTrail < 560) {
-    act3Vis(0);
-  } else if (scrollTrail > 815) {
-    act3Vis(1);
-  }
+  act3Controller(420, 750, 200, scrollTrail);
 
   fpsCounter += 1;
 }, convertToTick(fps));
