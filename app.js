@@ -1,9 +1,11 @@
+// Target Vars: Act 1
 const intro = document.querySelector(".intro");
 const img = intro.querySelector("img");
-const text = intro.querySelector(".text");
-const body = document.querySelector("body");
 
-// Bio
+// Target Vars: Act 2
+const text = intro.querySelector(".text");
+
+// Target Vars: Act 3
 const bioImg = document.querySelector(".bImage");
 const bioText = document.querySelector(".bText");
 const image1 = document.querySelector("#image1");
@@ -12,11 +14,12 @@ const image3 = document.querySelector("#image3");
 const image4 = document.querySelector("#image4");
 const image5 = document.querySelector("#image5");
 
-// Camera Zoom Animation
-let accelAmount = 0.1;
+// Animation Vars: Act 1
+let trailRate = 0.1;
 let scrollPos = 0;
 let scrollTrail = 0;
 
+// Helper Functions
 const setOpacity = (element, value) => {
   element.setAttribute(
     "style",
@@ -25,10 +28,17 @@ const setOpacity = (element, value) => {
   );
 };
 
+const convertToTick = value => 1000 / value;
+
+// Animation Loop
+let fps = 60;
+let fpsCounter = 0;
+
 setInterval(() => {
+  // console.log(`FPS Target: ${fps}, Target: ${convertToTick(fps)}`);
   scrollPos = window.scrollY;
-  scrollTrail += (scrollPos - scrollTrail) * accelAmount;
-  console.log(`The scrollTrail is currently: ${scrollTrail}`);
+  scrollTrail += (scrollPos - scrollTrail) * trailRate;
+  // console.log(`The scrollTrail is currently: ${scrollTrail}`);
 
   //  Act 1 : Camera Zoom In
   img.setAttribute(
@@ -87,6 +97,10 @@ setInterval(() => {
     setOpacity(image4, 1);
     setOpacity(image5, 1);
   }
+  fpsCounter += 1;
+}, convertToTick(fps));
 
-  // Act 3: Bio Load
-}, 15);
+setInterval(() => {
+  console.log(`FrameRate: ${fpsCounter}`);
+  fpsCounter = 0;
+}, 1000);
