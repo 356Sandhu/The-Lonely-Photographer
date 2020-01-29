@@ -17,6 +17,14 @@ let accelAmount = 0.1;
 let scrollPos = 0;
 let scrollTrail = 0;
 
+const setOpacity = (element, value) => {
+  element.setAttribute(
+    "style",
+    `opacity: ${value};
+     `
+  );
+};
+
 setInterval(() => {
   scrollPos = window.scrollY;
   scrollTrail += (scrollPos - scrollTrail) * accelAmount;
@@ -55,113 +63,29 @@ setInterval(() => {
 
   // Act 3 Biography
   else if (scrollTrail > 560 && scrollTrail < 820) {
-    bioImg.setAttribute(
-      "style",
-      `opacity: ${(-560 + scrollTrail) * 0.02};
-       `
-    );
-    bioText.setAttribute(
-      "style",
-      `opacity: ${(-560 + scrollTrail) * 0.01};
-       `
-    );
-    image1.setAttribute(
-      "style",
-      `opacity: ${(-560 + scrollTrail) * 0.005};
-       `
-    );
-    image2.setAttribute(
-      "style",
-      `opacity: ${(-575 + scrollTrail) * 0.005};
-       `
-    );
-    image3.setAttribute(
-      "style",
-      `opacity: ${(-590 + scrollTrail) * 0.005};
-       `
-    );
-    image4.setAttribute(
-      "style",
-      `opacity: ${(-605 + scrollTrail) * 0.005};
-       `
-    );
-    image5.setAttribute(
-      "style",
-      `opacity: ${(-615 + scrollTrail) * 0.005};
-       `
-    );
+    setOpacity(bioImg, (-560 + scrollTrail) * 0.02);
+    setOpacity(bioText, (-560 + scrollTrail) * 0.01);
+    setOpacity(image1, (-560 + scrollTrail) * 0.005);
+    setOpacity(image2, (-575 + scrollTrail) * 0.005);
+    setOpacity(image3, (-590 + scrollTrail) * 0.005);
+    setOpacity(image4, (-605 + scrollTrail) * 0.005);
+    setOpacity(image5, (-615 + scrollTrail) * 0.005);
   } else if (scrollTrail < 560) {
-    bioImg.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
-    bioText.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
-    image1.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
-    image2.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
-    image3.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
-    image4.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
-    image5.setAttribute(
-      "style",
-      `opacity: 0;
-       `
-    );
+    setOpacity(bioImg, 0);
+    setOpacity(bioText, 0);
+    setOpacity(image1, 0);
+    setOpacity(image2, 0);
+    setOpacity(image3, 0);
+    setOpacity(image4, 0);
+    setOpacity(image5, 0);
   } else if (scrollTrail > 815) {
-    bioImg.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
-    bioText.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
-    image1.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
-    image2.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
-    image3.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
-    image4.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
-    image5.setAttribute(
-      "style",
-      `opacity: 1;
-       `
-    );
+    setOpacity(bioImg, 1);
+    setOpacity(bioText, 1);
+    setOpacity(image1, 1);
+    setOpacity(image2, 1);
+    setOpacity(image3, 1);
+    setOpacity(image4, 1);
+    setOpacity(image5, 1);
   }
 
   // Act 3: Bio Load
