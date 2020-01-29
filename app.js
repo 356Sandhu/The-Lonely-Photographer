@@ -28,6 +28,10 @@ const setOpacity = (element, value) => {
   );
 };
 
+const act2Vis = value => {
+  setOpacity(text, value);
+};
+
 const act3Vis = value => {
   setOpacity(bioImg, value);
   setOpacity(bioText, value);
@@ -44,11 +48,34 @@ const convertToTick = value => 1000 / value;
 let fps = 60;
 let fpsCounter = 0;
 
+const fadeIn = (min, max, pos) => {
+  let increments = max - min;
+  return (increments / 10000) * (pos - min);
+};
+
+const fadeOut = (min, max, pos) => {
+  let increments = max - min;
+  return 1 - (increments / 10000) * (pos - min);
+};
+
+const act2Controller = (min, max, length, pos) => {
+  let buffer = (max - min - length) / 2;
+  if (pos < min) {
+    act2Vis(0);
+  } else if (pos > min && pos < min + buffer) {
+    act2Vis(fadeIn(min, min + buffer, pos));
+  } else if (pos > min + buffer && pos < max - buffer) {
+    act2Vis(fadeOut(min + buffer, max - buffer, pos));
+  } else if (pos > max - buffer && pos < max) {
+    act2Vis(0);
+  }
+};
+
 setInterval(() => {
   // console.log(`FPS Target: ${fps}, Target: ${convertToTick(fps)}`);
   scrollPos = window.scrollY;
   scrollTrail += (scrollPos - scrollTrail) * trailRate;
-  // console.log(`The scrollTrail is currently: ${scrollTrail}`);
+  console.log(`The scrollTrail is currently: ${scrollTrail}`);
 
   //  Act 1 : Camera Zoom In
   img.setAttribute(
@@ -59,18 +86,10 @@ setInterval(() => {
       filter: brightness(${100 - scrollTrail}%);`
   );
 
-  // Act 2:
-  if (scrollTrail > 150 && 360 > scrollTrail) {
-    setOpacity(text, (-150 + scrollTrail) * 0.01);
-  } else if (scrollTrail < 150) {
-    setOpacity(text, 0);
-  } else if (scrollTrail > 360 && 550 > scrollTrail) {
-    let textAway = scrollTrail - 400;
-    setOpacity(text, 1 - textAway / 100);
-  }
+  act2Controller(140, 550, 200, scrollTrail);
 
   // Act 3 Biography
-  else if (scrollTrail > 560 && scrollTrail < 820) {
+  if (scrollTrail > 560 && scrollTrail < 820) {
     setOpacity(bioImg, (-560 + scrollTrail) * 0.02);
     setOpacity(bioText, (-560 + scrollTrail) * 0.01);
     setOpacity(image1, (-560 + scrollTrail) * 0.005);
@@ -84,10 +103,10 @@ setInterval(() => {
     act3Vis(1);
   }
 
-  // count frame
   fpsCounter += 1;
 }, convertToTick(fps));
 
+// Display FPS
 setInterval(() => {
   console.log(`FrameRate: ${fpsCounter}`);
   fpsCounter = 0;
