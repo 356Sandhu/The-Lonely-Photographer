@@ -14,10 +14,14 @@ const image3 = document.querySelector("#image3");
 const image4 = document.querySelector("#image4");
 const image5 = document.querySelector("#image5");
 
-// Animation Vars: Act 1
+// Scroll Vars
 let trailRate = 0.1;
 let scrollPos = 0;
 let scrollTrail = 0;
+
+// FPS vars
+let fps = 60;
+let fpsCounter = 0;
 
 // Helper Functions
 const setOpacity = (element, value) => {
@@ -43,10 +47,6 @@ const act3Vis = value => {
 };
 
 const convertToTick = value => 1000 / value;
-
-// Animation Loop
-let fps = 60;
-let fpsCounter = 0;
 
 const fadeIn = (min, max, pos) => {
   let increments = 100 / (max - min);
@@ -87,23 +87,22 @@ const act3Controller = (min, max, length, pos) => {
     act3Vis(0);
   } else if (pos > min && pos < min + buffer) {
     act3Vis(fadeIn(min, min + buffer, pos));
-    console.log(`Min: ${min} Max: ${min + buffer}`);
-    console.log(`Fading: ${fadeIn(min, min + buffer, pos)}`);
   } else if (pos > min + buffer) {
     act3Vis(1);
   }
 };
 
+// Event loop
+
 setInterval(() => {
   scrollPos = window.scrollY;
   scrollTrail += (scrollPos - scrollTrail) * trailRate;
-  console.log(`The scrollTrail is currently: ${scrollTrail}`);
 
-  act1Controller(0, 140, 140, scrollTrail);
+  act1Controller(0, 110, 110, scrollTrail);
 
-  act2Controller(140, 420, 200, scrollTrail);
+  act2Controller(110, 290, 100, scrollTrail);
 
-  act3Controller(420, 750, 200, scrollTrail);
+  act3Controller(290, 800, 230, scrollTrail);
 
   fpsCounter += 1;
 }, convertToTick(fps));
