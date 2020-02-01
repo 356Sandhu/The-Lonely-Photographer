@@ -61,8 +61,8 @@ const fadeOut = (min, max, pos) => {
 const act1Controller = (min, max, length, pos) => {
   img.setAttribute(
     "style",
-    `transform: rotate(${(pos / 15) * 1.5}deg) scale(${1 + pos / 15}, ${1 +
-      pos / 15}) !important;
+    `transform: rotate(${(pos / 15) * 1.5}deg) scale(${1 + pos / 5}, ${1 +
+      pos / 5}) translateX(${pos / -2.25}px) !important;
       opacity: ${100 - (pos * 11) / 15};
       filter: brightness(${100 - pos}%);`
   );
