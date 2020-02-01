@@ -1,4 +1,5 @@
 // Target Vars: Act 1
+const head = document.getElementById("head");
 const intro = document.querySelector(".intro");
 const img = intro.querySelector("img");
 
@@ -13,6 +14,8 @@ const image2 = document.querySelector("#image2");
 const image3 = document.querySelector("#image3");
 const image4 = document.querySelector("#image4");
 const image5 = document.querySelector("#image5");
+
+const bGrid = document.querySelector(".bGrid");
 
 // Scroll Vars
 let trailRate = 0.1;
@@ -38,7 +41,15 @@ const act2Vis = value => {
 
 const act3Vis = value => {
   setOpacity(bioImg, value);
-  setOpacity(bioText, value);
+  // setOpacity(bioText, value);
+  setOpacity(image1, value);
+  setOpacity(image2, value);
+  setOpacity(image3, value);
+  setOpacity(image4, value);
+  setOpacity(image5, value);
+};
+
+const act4Vis = value => {
   setOpacity(image1, value);
   setOpacity(image2, value);
   setOpacity(image3, value);
@@ -66,6 +77,8 @@ const act1Controller = (min, max, length, pos) => {
       opacity: ${100 - (pos * 11) / 15};
       filter: brightness(${100 - pos}%);`
   );
+  //
+  setOpacity(head, `${5 - (pos * 15) / 15}`);
 };
 
 const act2Controller = (min, max, length, pos) => {
@@ -100,9 +113,9 @@ setInterval(() => {
 
   act1Controller(0, 110, 110, scrollTrail);
 
-  act2Controller(110, 290, 100, scrollTrail);
+  act2Controller(110, 600, 400, scrollTrail);
 
-  act3Controller(290, 800, 230, scrollTrail);
+  act3Controller(600, 1500, 250, scrollTrail);
 
   fpsCounter += 1;
 }, convertToTick(fps));

@@ -15,7 +15,13 @@ body {
   font-family: sans-serif;
   overflow-x: hidden;
   background: black;
-  height: 200vh;
+  height: 300vh;
+}
+
+#head {
+  color: black;
+  position: fixed;
+  z-index: 1;
 }
 
 .intro {
@@ -65,7 +71,8 @@ body {
 .bio {
   display: grid;
   height: 100%;
-  grid-template-areas: "portraitL portraitL portraitL portraitL textL gridL gridL gridL gridL";
+  grid-template-areas: "portraitL portraitL gridL gridL gridL";
+  grid-gap: 1rem;
   color: white;
 }
 
@@ -84,6 +91,7 @@ body {
   padding: 0.25rem;
   grid-area: textL;
   opacity: 0;
+  display: none;
 }
 
 .bio .bText h1 {
@@ -96,6 +104,7 @@ body {
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   grid-gap: 1rem;
+  position: relative;
 }
 
 .bio .bGrid #image1 {
@@ -138,4 +147,14 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+.bio .bGrid img:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 550px) {
+  .intro .text {
+    font-size: 1.5rem;
+  }
 }
